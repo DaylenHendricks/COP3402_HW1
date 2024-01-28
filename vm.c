@@ -5,19 +5,20 @@
 
 #include <stdio.h> //libraries
 
-int base(int BP, int L)
+int PAS[500] = {0}; //initializing process address space to 0s
+
+int base(int BP, int L) //Find base L levels down
 {
     int arb = BP; //arb =  activation record base
     while(L>0) //find base L levels down
-        {
-            arb = pas(arb);
-            L--;
-        }
+    {
+        arb = pas(arb);
+        L--;
+    }
     return arb;
 }
 int main(){
     FILE* inFile = fopen("myfile.txt", "r"); //initialize file pointer & text input file in read mode
-    int PAS[500] = {0}; //initializing process address space to 0
     
     
 }
