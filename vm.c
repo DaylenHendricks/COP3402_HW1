@@ -5,9 +5,9 @@
 
 #include <stdio.h> //libraries
 
-int PAS[500] = {0}; //initializing process address space to 0s
+int PAS[500] = {0}; //initializing process address space to 0
 
-int base(int BP, int L) //Find base L levels down
+int base(int BP, int L) //Find base L levels down function
 {
     int arb = BP; //arb =  activation record base
     while(L>0) //find base L levels down
@@ -17,8 +17,16 @@ int base(int BP, int L) //Find base L levels down
     }
     return arb;
 }
+
+
 int main(){
-    FILE* inFile = fopen("myfile.txt", "r"); //initialize file pointer & text input file in read mode
-    
-    
+    int count = 0, curVal, PC, BP, SP;
+    FILE* inputFile;
+    inputFile = fopen("text", "r"); //initialize file pointer & text input file in read mode
+    while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
+    {
+        PAS[count] = curVal;
+        printf("%d", PAS[count]);
+        count++;
+    }
 }
