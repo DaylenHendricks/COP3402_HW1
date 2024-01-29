@@ -20,12 +20,13 @@ int base(int BP, int L) //Find base L levels down function
 
 
 int main(){
-    FILE* inputFile = fopen("myfile.txt", "r"); //initialize file pointer & text input file in read mode
-    fileChar = 0;
-    while(inputFile[i] != -1)
+    int count = 0, curVal, PC, BP, SP;
+    FILE* inputFile;
+    inputFile = fopen("text", "r"); //initialize file pointer & text input file in read mode
+    while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
     {
-        PAS[i] = fgetc(inputFile);
-        print(PAS[i]);
-        i++;
+        PAS[count] = curVal;
+        printf("%d", PAS[count]);
+        count++;
     }
 }
