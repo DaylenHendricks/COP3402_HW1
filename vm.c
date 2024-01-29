@@ -29,4 +29,58 @@ int main(){
         printf("%d", PAS[count]);
         count++;
     }
+
+        while(flag == 0)//fetch loop
+    {
+        switch(PAS[PC])//checking instruction type
+        {
+            case 1:
+            {
+                PAS[SP] = PAS[PC + 2];
+                SP -= 1;
+                break;
+            }
+            case 2:
+            {
+                
+                break;
+            }
+            case 3:
+            {
+                
+                break;
+            }
+            case 4:
+            {
+                
+                break;
+            }
+            case 5:
+            {
+                
+                break;
+            }
+            case 6:
+            {
+
+                break;
+            }
+            case 7:
+            {
+                
+                break;
+            }
+            case 8:
+            {
+                
+                break;
+            }
+            case 9:
+            {
+                
+                break;
+            }
+        }
+    }
+
 }
