@@ -20,13 +20,102 @@ int base(int BP, int L) //Find base L levels down function
 
 
 int main(){
-    int count = 0, curVal, PC, BP, SP;
+    printf("Start");//debug
+    int count = 0, flag = 0, curVal, pc = 0, sp = 500, bp = sp - 1;
     FILE* inputFile;
     inputFile = fopen("text", "r"); //initialize file pointer & text input file in read mode
+    printf("Begin File IO");//debug
     while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
     {
-        PAS[count] = curVal;
-        printf("%d", PAS[count]);
+        pas[count] = curVal;
+        printf("%d", pas[count]);//checking insertion
         count++;
+    }
+    printf("Begin Fetch-Execute");
+    while(flag == 0)//fetch loop
+    {
+        switch(pas[pc])//checking instruction type
+        {
+            case 1: //LIT 0,M
+            {
+                pas[sp] = pas[pc + 2];
+                sp -= 1;
+                break;
+            }
+            case 2: //RTN 0,M
+            {
+                sp = bp + 1;
+                bp = pas[sp - 2];
+                pc = pas[sp - 3];
+                break;
+            }
+            case 3: //LOD L,M
+            {
+                sp -= 1;
+                pas[sp] = pas[base(bp, pas[pc + 1]) - pas[pc + 2]];
+                break;
+            }
+            case 4: //STO L<M
+            {
+                pas[base(bp, pas[pc + 1]) - pas[pc + 2]] = pas[sp];
+                sp += 1;
+                break;
+            }
+            case 5: //CAL L,M | Initializing new Activation Record
+            {
+                pas[sp - 1] = base(bp, pas[pc + 1]); //static link (SL)
+                pas[sp - 2] = bp; //dynamic link (DL)
+                pas[sp - 3] = pc; //return address (RA)
+                bp = pas[sp - 1]; //base pointer points to static link
+                pc = pas[pc + 2]; //
+                break;
+            }
+            case 6: //INC 0,M
+            {
+                sp -= pas[sp + 2];
+                break;
+            }
+            case 7: //JMP 0,M
+            {
+                pc = pas[sp + 2];
+                break;
+            }
+            case 8: //JPC 0,M
+            {
+                if (pas[sp] == 00)
+                {
+                    pc = pas[pc + 2];
+                    sp += 1;
+                };
+                break;
+            }
+            case 9: //SYS (Need to include three subroutines)
+            {
+                switch(pas[pc + 2])
+                {
+                    case 1:
+                    {
+                        //code
+                        break;
+                    }
+                    case 2:
+                    {
+                        //code
+                        break;
+                    }
+                    case 3:
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    int i;
+    while(i = 0, i < 500, i++)
+    {
+        printf(pas[i]); //checking pas[]
     }
 }
