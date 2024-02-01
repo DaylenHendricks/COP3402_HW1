@@ -51,7 +51,8 @@ int main(){
             }
             case 2: //RTN 0,M
             {
-                switch(pas[curpc + 2] == 0)//math opr or RTN check
+                printf("OPR-");
+                switch(pas[curpc + 2])//math opr or RTN check
                 {
                     case 0:
                     {
@@ -60,6 +61,82 @@ int main(){
                     bp = pas[sp - 2];
                     pc = pas[sp - 3];
                     break;
+                    }
+                    case 1://ADD
+                    {
+                        printf("ADD\n");
+                        pas[sp + 1] = pas[sp + 1] + pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 2://SUB
+                    {
+                        printf("SUB\n");
+                        pas[sp + 1] = pas[sp + 1] - pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 3://MUL
+                    {
+                        printf("MUL\n");
+                        pas[sp + 1] = pas[sp + 1] * pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 4://DIV
+                    {
+                        printf("DIV\n");
+                        pas[sp + 1] = pas[sp +1] / pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 5://EQL
+                    {
+                        printf("EQL\n");
+                        pas[sp +1] = pas[sp + 1] == pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 6://NEQ
+                    {
+                        printf("NEQ\n");
+                        pas[sp + 1] = pas[sp + 1] != pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 7://LSS
+                    {
+                        printf("LSS\n");
+                        pas[sp + 1] = pas[sp + 1] < pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 8://LEQ
+                    {
+                        printf("LEQ\n");
+                        pas[sp + 1] = pas[sp + 1] <= pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 9://GTR
+                    {
+                        printf("GTR\n");
+                        pas[sp + 1] = pas[sp + 1] > pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 10://GEQ
+                    {
+                        printf("GEQ\n");
+                        pas[sp + 1] = pas[sp + 1] >= pas[sp];
+                        sp += 1;
+                        break;
+                    }
+                    case 11://ODD
+                    {
+                        printf("ODD\n");
+                        pas[sp] =  pas[sp] % 2;
+                        break;
                     }
                 }
                 
