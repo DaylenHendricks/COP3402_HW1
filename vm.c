@@ -21,7 +21,8 @@ int base(int BP, int L) //Find base L levels down function
 
 int main(){
     printf("Start");//debug
-    int count = 0, flag = 0, curVal, pc = 0, sp = 500, bp = sp - 1;
+    //curpc is indexing the instruction's values passed to the IR because pc increments after fetch but before execute
+    int count = 0, flag = 1, curVal, pc = 0, curpc = 0, sp = 500, bp = sp - 1;
     FILE* inputFile;
     inputFile = fopen("text", "r"); //initialize file pointer & text input file in read mode
     printf("Begin File IO");//debug
@@ -32,13 +33,16 @@ int main(){
         count++;
     }
     printf("Begin Fetch-Execute");
-    while(flag == 0)//fetch loop
+    while(flag == 1)//fetch loop
     {
+        curpc = pc;//to keep track of index for current execution
+        pc += 3;//actual program counter
         switch(pas[pc])//checking instruction type
         {
+
             case 1: //LIT 0,M
             {
-                pas[sp] = pas[pc + 2];
+                pas[sp] = pas[curpc + 2];
                 sp -= 1;
                 break;
             }
@@ -52,22 +56,22 @@ int main(){
             case 3: //LOD L,M
             {
                 sp -= 1;
-                pas[sp] = pas[base(bp, pas[pc + 1]) - pas[pc + 2]];
+                pas[sp] = pas[base(bp, pas[curpc + 1]) - pas[curpc + 2]];
                 break;
             }
             case 4: //STO L<M
             {
-                pas[base(bp, pas[pc + 1]) - pas[pc + 2]] = pas[sp];
+                pas[base(bp, pas[curpc + 1]) - pas[curpc + 2]] = pas[sp];
                 sp += 1;
                 break;
             }
             case 5: //CAL L,M | Initializing new Activation Record
             {
-                pas[sp - 1] = base(bp, pas[pc + 1]); //static link (SL)
+                pas[sp - 1] = base(bp, pas[curpc + 1]); //static link (SL)
                 pas[sp - 2] = bp; //dynamic link (DL)
                 pas[sp - 3] = pc; //return address (RA)
                 bp = pas[sp - 1]; //base pointer points to static link
-                pc = pas[pc + 2]; //
+                pc = pas[curpc + 2]; //
                 break;
             }
             case 6: //INC 0,M
@@ -84,14 +88,14 @@ int main(){
             {
                 if (pas[sp] == 00)
                 {
-                    pc = pas[pc + 2];
+                    pc = pas[curpc + 2];
                     sp += 1;
                 };
                 break;
             }
             case 9: //SYS (Need to include three subroutines)
             {
-                switch(pas[pc + 2])
+                switch(pas[curpc + 2])
                 {
                     case 1:
                     {
@@ -108,7 +112,7 @@ int main(){
                     }
                     case 3:
                     {
-                        flag = 1;
+                        flag = 0;
                         break;
                     }
                 }
