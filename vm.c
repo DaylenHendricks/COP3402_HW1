@@ -95,12 +95,15 @@ int main(){
                 {
                     case 1:
                     {
-                        //code
+                        printf("%d", pas[sp]);
+                        sp += 1;
                         break;
                     }
                     case 2:
                     {
-                        //code
+                        sp =  sp - 1;
+                        printf("Please Enter an Integer: ");
+                        pas[sp] = getc(stdin);
                         break;
                     }
                     case 3:
