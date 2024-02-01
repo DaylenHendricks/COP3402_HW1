@@ -5,14 +5,14 @@
 
 #include <stdio.h> //libraries
 
-int PAS[500] = {0}; //initializing process address space to 0
+int pas[500] = {0}; //initializing process address space to 0
 
 int base(int BP, int L) //Find base L levels down function
 {
     int arb = BP; //arb =  activation record base
     while(L>0) //find base L levels down
     {
-        arb = pas(arb);
+        arb = pas[arb];
         L--;
     }
     return arb;
