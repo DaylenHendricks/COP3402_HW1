@@ -20,12 +20,12 @@ int base(int BP, int L) //Find base L levels down function
 }
 
 
-int main(){
+int main(int argc, char *fileName[]){
     printf("Start");//debug
     //curpc is indexing the instruction's values passed to the IR because pc increments after fetch but before execute
     int count = 0, flag = 1, curVal, pc = 0, curpc = 0, sp = 500, bp = sp - 1;
     FILE* inputFile;
-    inputFile = fopen("text", "r"); //initialize file pointer & text input file in read mode
+    inputFile = fopen(fileName[1], "r"); //initialize file pointer & text input file in read mode
     printf("Begin File IO\n");//debug
     while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
     {
