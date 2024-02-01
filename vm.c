@@ -4,6 +4,7 @@
 //Date
 
 #include <stdio.h> //libraries
+#include <stdlib.h>
 
 int pas[500] = {0}; //initializing process address space to 0
 
@@ -32,29 +33,30 @@ int main(){
         printf("%d", pas[count]);//checking insertion
         count++;
     }
-    printf("Begin Fetch-Execute\n");
+    printf("\nBegin Fetch-Execute\n");
     while(flag == 1)//fetch loop
     {
         curpc = pc;//to keep track of index for current execution
         pc = pc + 3;//actual program counter
         printf("PC: %d\n", pc);
         printf("curpc: %d\n", curpc);
+        printf("Bottom 3 of stack: %d %d %d %d\n", pas[sp+3], pas[sp+2], pas[sp+1], pas[sp]);
         switch(pas[curpc])//checking instruction type
         {
 
             case 1: //LIT 0,M
             {
                 printf("LIT\n");
-                pas[sp] = pas[curpc + 2];
                 sp -= 1;
+                pas[sp] = pas[curpc + 2];
                 break;
             }
-            case 2: //RTN 0,M
+            case 2: //OPR 0,M
             {
                 printf("OPR-");
                 switch(pas[curpc + 2])//math opr or RTN check
                 {
-                    case 0:
+                    case 0://RTN
                     {
                     printf("RTN\n");
                     sp = bp + 1;
@@ -162,14 +164,14 @@ int main(){
                 pas[sp - 1] = base(bp, pas[curpc + 1]); //static link (SL)
                 pas[sp - 2] = bp; //dynamic link (DL)
                 pas[sp - 3] = pc; //return address (RA)
-                bp = pas[sp - 1]; //base pointer points to static link
-                pc = pas[curpc + 2]; //
+                bp = sp - 1; //base pointer points to static link
+                pc = pas[curpc + 2]; //M value
                 break;
             }
             case 6: //INC 0,M
             {
                 printf("INC\n");
-                sp -= pas[sp + 2];
+                sp -= pas[curpc + 2];
                 break;
             }
             case 7: //JMP 0,M
@@ -205,7 +207,7 @@ int main(){
                         printf("2\n");
                         sp =  sp - 1;
                         printf("Please Enter an Integer: ");
-                        pas[sp] = getc(stdin);
+                        fscanf(stdin, "%d", &pas[sp]);
                         break;
                     }
                     case 3:
