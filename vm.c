@@ -212,28 +212,31 @@ int main(int argc, char *fileName[]){
             }
             case 9: //SYS (Need to include three subroutines)
             {
-                printf("SYS: ");
+                //printf("SYS: ");
                 switch(pas[curpc + 2])
                 {
                     case 1:
                     {
-                        printf("1\n");
-                        printf("%d", pas[sp]);
+                        //printf("1\n");
+                        printf("Output result is: %d\n", pas[sp]);
                         sp += 1;
+                        printf("SOU %d %d\t %d %d %d\n", pas[curpc + 1], pas[curpc + 2], pc, bp, sp);
                         break;
                     }
                     case 2:
                     {
-                        printf("2\n");
+                        //printf("2\n");
                         sp =  sp - 1;
                         printf("Please Enter an Integer: ");
                         fscanf(stdin, "%d", &pas[sp]);
+                        //printf("SOU %d %d\t %d %d %d\n", pas[curpc + 1], pas[curpc + 2], pc, bp, sp);
                         break;
                     }
                     case 3:
                     {
-                        printf("3\n");
+                        //printf("3\n");
                         flag = 0;
+                        printf("EOP %d %d\t %d %d %d\n", pas[curpc + 1], pas[curpc + 2], pc, bp, sp);
                         break;
                     }
                 }
