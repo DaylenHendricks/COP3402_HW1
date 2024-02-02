@@ -1,7 +1,7 @@
 //Homework 1: P-Machine
 //Authors: Daylen Hendricks, Brandon Ramlagan
 //COP 3402 Spring 2024
-//Date
+//Date 2/2/2024
 
 #include <stdio.h> //libraries
 #include <stdlib.h>
@@ -35,11 +35,10 @@ int main(int argc, char *fileName[]){
     while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
     {
         pas[count] = curVal;
-        printf("%d", pas[count]);//checking insertion
         count++;
     }
-    printf("\t\t PC BP SP  \tstack\n");
-    printf("Initial values:  %d %d %d\n", pc, bp, sp);
+    printf(" \t\t PC BP SP  \tstack\n"); //Headers for the output file
+    printf("Initial values:  %d %d %d\n", pc, bp, sp); 
     while(flag == 1)//fetch loop
     {
         curpc = pc;//to keep track of index for current execution
