@@ -230,20 +230,21 @@ int main(int argc, char *fileName[]){
                 break;
             }
         }
-        for(int i = 0; i <= (499 - sp); i++)
+        //loop for printing
+        for(int i = 0; i <= (499 - sp); i++)//the range of the print func
         {
-            if(bpCount != 0)
+            if(bpCount != 0)//checking if a new AR has been created
             {
-                for(int tempCount = 1; tempCount <= bpCount; tempCount++)
+                for(int tempCount = 1; tempCount <= bpCount; tempCount++)//^if so, then check the bp values for the delimiter
                 {
-                    if(499 - i == bpArr[tempCount])
+                    if(499 - i == bpArr[tempCount])//if the index of the next print is the same as one of the AR bp values, print the vertical bar
                     {
                         printf("| ");
                     }
                 }
             }
-            printf("%d ", pas[499 - i]);
+            printf("%d ", pas[499 - i]);//then print the value
         }
-        printf("\n");
+        printf("\n");//newline for spacing
     }
 }
