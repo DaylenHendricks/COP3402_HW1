@@ -30,8 +30,8 @@ int main(int argc, char *fileName[]){
     int sp = 500; //stack pointer
     int bp = sp - 1; //base pointer
     int bpArr[10] = {499};//base pointer array for printing functionality
-    int bpCount = 0;//count number of bp changes for printing functionality    FILE* inputFile;
-    inputFile = fopen(fileName[1], "r"); //initialize file pointer & text input file in read mode
+    int bpCount = 0;//count number of bp changes for printing functionality    
+    FILE* inputFile = fopen(fileName[1], "r"); //initialize file pointer & text input file in read mode
     while(fscanf(inputFile, "%d", &curVal) == 1)//loop through text and insert in PAS
     {
         pas[count] = curVal;
