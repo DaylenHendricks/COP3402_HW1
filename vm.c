@@ -224,6 +224,6 @@ int main(int argc, char *fileName[]){
     int i;
     while(i = 0, i < 500, i++)
     {
-        printf("%d", &pas[i]); //checking pas[] values
+        printf("%d", pas[i]); //checking pas[] values
     }
 }
