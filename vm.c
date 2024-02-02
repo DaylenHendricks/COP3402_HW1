@@ -23,8 +23,15 @@ int base(int BP, int L) //Find base L levels down function
 
 
 int main(int argc, char *fileName[]){
-    //curpc is indexing the instruction's values passed to the IR because pc increments after fetch but before execute
-    int count = 0, flag = 1, curVal, pc = 0, curpc = 0, sp = 500, bp = sp - 1, bpArr[10] = {499}, bpCount = 0;
+    int count = 0;//variable for file input tracking
+    int flag = 1;//EOP flag
+    int curVal; //current value in file input
+    int pc = 0;//program counter
+    int curpc = 0;//program counter for execution(for how we wrote it, the ISA statements are the same)
+    int sp = 500; //stack pointer
+    int bp = sp - 1; //base pointer
+    int bpArr[10] = {499};//base pointer array for printing functionality
+    int bpCount = 0;//count number of bp changes for printing functionality
     FILE* inputFile;
     inputFile = fopen(fileName[1], "r"); //initialize file pointer & text input file in read mode
     printf("Begin File IO\n");//debug
@@ -68,7 +75,7 @@ int main(int argc, char *fileName[]){
                     bp = pas[sp - 2];
                     pc = pas[sp - 3];
                     printf("RTN %d %d\t\t %d %d %d\t", pas[curpc + 1], pas[curpc + 2], pc, bp, sp);
-                    bpCount--;
+                    bpCount--;// incrementing the number of activation records for printing functionality
                     break;
                     }
                     case 1://ADD
@@ -187,8 +194,8 @@ int main(int argc, char *fileName[]){
                 bp = sp - 1; //base pointer points to static link
                 pc = pas[curpc + 2]; //M value
                 printf("CAL %d %d\t\t %d %d %d\t", pas[curpc + 1], pas[curpc + 2], pc, bp, sp);
-                bpCount++;
-                bpArr[bpCount] = bp;
+                bpCount++;//incrementing number of activation records / bp changes for printing functionality
+                bpArr[bpCount] = bp;//storing the bp value for printing function
                 break;
             }
             case 6: //INC 0,M
