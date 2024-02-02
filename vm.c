@@ -7,8 +7,6 @@
 #include <stdlib.h>
 
 int pas[500] = {0}; //initializing process address space to 0
-int stack[500] = {0};
-int counter = 500;
 
 int base(int BP, int L) //Find base L levels down function
 {
