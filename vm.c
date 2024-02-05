@@ -27,12 +27,10 @@ typedef struct instructionRegister //struct to store the values of the instructi
 
 
 int main(int argc, char *fileName[]){
-    //curpc is indexing the instruction's values passed to the IR because pc increments after fetch but before execute
     int count = 0;//variable for file input tracking
     int flag = 1;//EOP flag
     int curVal; //current value in file input
     int pc = 0;//program counter
-    //int curpc = 0;//program counter for execution(for how we wrote it, the ISA statements are the same)
     int sp = 500; //stack pointer
     int bp = sp - 1; //base pointer
     int bpArr[10] = {499};//base pointer array for printing functionality
